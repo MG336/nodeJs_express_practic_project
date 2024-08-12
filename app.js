@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 
 var logger = require('morgan');
 const {winston} = require('./logger/winstonLogger.js');
+const {mongoDbConnect, ObjectId, Binary} = require("./connectDb/mongoDb.js");
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -25,12 +26,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+app.locals.mongoDb = {
+  mongoDbConnect: mongoDbConnect,
+  ObjectId,
+  Binary
+}
 
 //my_project
 const taskManagement = require ('./practice_projects/taskManagement/taskManagement.js');
-const { error } = require('console');
+const signUp_v1 = require('./practice_projects/authentication/v1_mongoDb/signUp.js');
 app.use('/', taskManagement);
-
+app.use('/', signUp_v1);
 
 
 
@@ -49,11 +55,11 @@ app.use(function(err, req, res, next) {
 
   }
 
-  if (process.env.NODE_ENV !== 'production') {
-    logger.add(new winston.transports.Console({
-      format: winston.format.simple(),
-    }));
-  }
+  // if (process.env.NODE_ENV !== 'production') {
+  //   winston.add(new winston.transports.Console({
+  //     format: winston.format.simple(),
+  //   }));
+  // }
 
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
