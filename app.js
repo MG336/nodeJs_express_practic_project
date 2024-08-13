@@ -32,11 +32,29 @@ app.locals.mongoDb = {
   Binary
 }
 
-//my_project
+
+//practice_projects---------------------
+
 const taskManagement = require ('./practice_projects/taskManagement/taskManagement.js');
-const signUp_v1 = require('./practice_projects/authentication/v1_mongoDb/signUp.js');
 app.use('/', taskManagement);
+
+
+
+//authentication
+
+//v1_mongoDb
+const signUp_v1 = require('./practice_projects/authentication/v1_mongoDb/signUp.js');
+const login_v1 = require('./practice_projects/authentication/v1_mongoDb/login.js');
+const resendEmail_v1 = require('./practice_projects/authentication/v1_mongoDb/resendEmail.js');
+const emailVerified_v1 = require('./practice_projects/authentication/v1_mongoDb/emailVerified.js');
+const forgotPassword_v1 = require('./practice_projects/authentication/v1_mongoDb/forgotPassword.js');
+
 app.use('/', signUp_v1);
+app.use('/', login_v1);
+app.use('/', resendEmail_v1);
+app.use('/', emailVerified_v1);
+app.use('/', forgotPassword_v1);
+
 
 
 
