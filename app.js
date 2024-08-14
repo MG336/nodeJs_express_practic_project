@@ -56,6 +56,9 @@ app.use('/', emailVerified_v1);
 app.use('/', forgotPassword_v1);
 
 
+//upload
+const upload_v1 = require('./practice_projects/upload_files_to_server/v1/uploadFiles.js')
+app.use('/', upload_v1);
 
 
 

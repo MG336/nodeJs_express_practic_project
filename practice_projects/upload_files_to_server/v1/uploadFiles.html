@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id="input-file" type="file">
+</br>
+    <button id="upload-button">Upload</button>
+</body>
+<script>
+    function upload() {
+        const uploadButton = document.getElementById('upload-button');
+        const inputFile = document.getElementById('input-file');
+        
+        uploadButton.addEventListener('click', async ()=> {
+            const url = 'http://localhost:3000/v1/upload';
+            
+            // let option = {
+            //     method: 'post',
+            //     headers: {
+            //         'Content-Type': 'application/json'  
+            //     },
+            //     body: JSON.stringify({importDirPath, exportDirPath})
+            // };
+
+                const formData = new FormData();
+                formData.append('file', inputFile.files[0]);
+
+                const option = {
+                    method: 'POST',
+                    body: formData
+                }
+
+                let response = await fetch('http://localhost:3000/v1/upload', option);
+
+            await (url,option);
+            console.log('data send');
+        })
+    }
+    upload()
+</script>
+</html>

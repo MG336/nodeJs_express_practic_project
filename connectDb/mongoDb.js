@@ -14,7 +14,7 @@ const mongoDbConnect = (async function mg(){
        
 
     }catch(err){
-        console.error(err);
+        console.error('mongodb connect error');
     }
 })()
 
