@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Upload Files</title>
 </head>
 <body>
     <input id="input-file" type="file">
@@ -14,18 +14,10 @@
     function upload() {
         const uploadButton = document.getElementById('upload-button');
         const inputFile = document.getElementById('input-file');
-        
+       
         uploadButton.addEventListener('click', async ()=> {
             const url = 'http://localhost:3000/v1/upload';
-            
-            // let option = {
-            //     method: 'post',
-            //     headers: {
-            //         'Content-Type': 'application/json'  
-            //     },
-            //     body: JSON.stringify({importDirPath, exportDirPath})
-            // };
-
+            console.log(inputFile.files[0]);
                 const formData = new FormData();
                 formData.append('file', inputFile.files[0]);
 
@@ -35,8 +27,6 @@
                 }
 
                 let response = await fetch('http://localhost:3000/v1/upload', option);
-
-            await (url,option);
             console.log('data send');
         })
     }

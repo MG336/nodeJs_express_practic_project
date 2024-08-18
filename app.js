@@ -60,7 +60,9 @@ app.use('/', forgotPassword_v1);
 const upload_v1 = require('./practice_projects/upload_files_to_server/v1/uploadFiles.js')
 app.use('/', upload_v1);
 
-
+//download_files
+const download_v1 = require('./practice_projects/download_files/v1/download');
+app.use('/', download_v1);
 
 
 // catch 404 and forward to error handler

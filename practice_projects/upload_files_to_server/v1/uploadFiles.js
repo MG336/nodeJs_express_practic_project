@@ -26,7 +26,9 @@ async function createFolder(req, res, next){
    
 async function uploadFiles(req, res, next) {
     const uploadPath = req.upload.path;
-    
+    const file = req.file;
+    console.log(req.file);
+
     try {
     const storage = multer.diskStorage({
         destination: (req, file, cb) => {
@@ -40,14 +42,20 @@ async function uploadFiles(req, res, next) {
         }
     })
 
-    const upload = multer({storage: storage});
+    const upload = multer({storage: storage}).single('file');
 
-    upload.single('file')
+    upload(req, res, function (err) {
+        if (err) {
+            return next(err); // Обработка ошибок при загрузке
+        }
 
-    res.status(200).json({
-        message: 'File uploaded successfully',
-        file: req.file
-    })
+        console.log(req.file); // Теперь `req.file` определен
+
+        res.status(200).json({
+            message: 'File uploaded successfully',
+            // file: req.file
+        });
+    });
 
     }catch(err){
         next(err)

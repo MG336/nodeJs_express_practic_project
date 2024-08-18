@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>download</title>
+</head>
+<body>
+    <h1>Download file</h1>
+    <label for="download-file-name">Enter file name </label>
+    <input id="download-file-name" type="text" placeholder="1.txt">
+    <a id="download-file-link" href="#">Download</a>
+</body>
+<script>
+    function downloadFile(){
+        const fileName = document.getElementById('download-file-name');
+        const downloadBtn = document.getElementById('download-file-btn');
+        const downloadLink = document.getElementById('download-file-link');
+
+        function download(){
+            if(!fileName.value) {
+                console.error('No file name data')
+                return
+            }
+            const url = 'http://localhost:3000/v1/download/'+fileName.value;
+            downloadLink.href = url;
+            downloadLink.download = fileName;
+        }
+
+        downloadLink.addEventListener('click', download);
+    }
+    downloadFile()
+</script>
+</html>
