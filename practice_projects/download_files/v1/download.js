@@ -12,10 +12,11 @@ async function downloadFile(req, res, next){
         const newFileName = filename;
         res.download(filePath, newFileName, (err)=> {
             if(err){
-                res.status(500).json({
-                    message: 'Error downloading file',
-                    error: err.message
-                });
+                // res.status(500).json({
+                //     message: 'Error downloading file',
+                //     error: err.message
+                // });
+                next(err);
             }
         });
     }catch(err){
@@ -26,6 +27,9 @@ async function downloadFile(req, res, next){
 
 router.get('/v1/download/:filename', downloadFile);
 router.get('/v1/download', (req, res)=>{
+    console.log('download!!!!!!!!');
+    // res.status(200)
+    // res.sendStatus(200)
     res.sendFile(path.join(__dirname, 'download.html'));
 });
 
