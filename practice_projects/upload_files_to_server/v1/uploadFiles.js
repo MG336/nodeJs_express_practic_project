@@ -12,10 +12,6 @@ const router = express.Router();
 async function createFolder(req, res, next){
     const uploadPath = path.join(__dirname, 'upload');
 
-    //create folder if not exist
-    // if(!await fs.exists(uploadPath)){
-    //     await fs.mkdir(uploadPath)
-    // }
     await fs.mkdir(uploadPath, { recursive: true });
     req.upload = {
         path: uploadPath
@@ -28,7 +24,7 @@ async function uploadFiles(req, res, next) {
     const uploadPath = req.upload.path;
     const file = req.file;
     console.log(req.file);
-
+    console.log('uploadFiles!!!!!!!!!!!!!!!!!!!!!!!!!!!');
     try {
     const storage = multer.diskStorage({
         destination: (req, file, cb) => {
