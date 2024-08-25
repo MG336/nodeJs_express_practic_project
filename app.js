@@ -61,14 +61,27 @@ const upload_v1 = require('./practice_projects/upload_files_to_server/v1/uploadF
 app.use('/', upload_v1);
 
 //download_files
-const download_v1 = require('./practice_projects/download_files/v1/download');
+const download_v1 = require('./practice_projects/download_files/v1/download.js');
 app.use('/', download_v1);
+
+// WebSocket port 3001
+require('./practice_projects/webSocket/v1/webSocketServer.js');
+app.use('/v1/websocket',(req, res, next) => {
+  console.log("webSocketServerClient send");
+  res.sendFile(path.join(__dirname, './practice_projects/webSocket/v1/webSocketServerClient.html'));
+});
+
+
+
+// app.use('/', webSocket_v1);
 
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
+// 
 
 // error handler
 app.use(function(err, req, res, next) {
