@@ -5,7 +5,7 @@
 
 const express = require("express");
 const router = express.Router();
-const {poolPostgreSQL} = require('../../connectDb/postgreSQL');
+const {poolPostgreSQL} = require('../../../connectDb/postgreSQL');
 
 function checkDatabaseResult(result){
     // if(result.rows.length === 0) {return res.status(404).json({message: 'Task not found'})}
@@ -15,8 +15,8 @@ function checkDatabaseResult(result){
 }
 
 async function createTask(req, res, next){
+    console.log('req.body',req.body)    
     const {title, completed} = req.body;
-
     try{
         const result = await poolPostgreSQL.query(
             'INSERT INTO tasks (title, completed) VALUES ($1, $2) RETURNING *',
@@ -89,26 +89,10 @@ async function deleteTaskById(req, res, next) {
     }
 }
 
-
-
-      
-
-//  status HTTP
-//      - 200 OK — успешный запрос.
-//      - 201 Created — ресурс успешно создан.
-//      - 204 No Content — успешное удаление без содержимого.
-//      - 400 Bad Request — ошибка в запросе клиента.
-//      - 401 Unauthorized — требуется аутентификация.
-//      - 403 Forbidden — доступ запрещен.
-//      - 404 Not Found — ресурс не найден.
-//      - 500 Internal Server Error — ошибка на сервере.
-
-
-
-router.get('/tasks', getAllTasks);
-router.post('/tasks', createTask);
-router.get('/tasks/:id', getTaskById);
-router.put('/tasks/:id', updateTaskById);
-router.delete('/tasks/:id', deleteTaskById);
+router.get('/v1/tasks', getAllTasks);
+router.post('/v1/create-task', createTask);
+router.get('/v1/task/:id', getTaskById);
+router.put('/v1/task/:id', updateTaskById);
+router.delete('/v1/task/:id', deleteTaskById);
 
 module.exports = router;

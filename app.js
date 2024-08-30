@@ -35,7 +35,7 @@ app.locals.mongoDb = {
 
 //practice_projects---------------------
 
-const taskManagement = require ('./practice_projects/taskManagement/taskManagement.js');
+const taskManagement = require ('./practice_projects/task_manager/v1/taskManager.js');
 app.use('/', taskManagement);
 
 
@@ -65,15 +65,20 @@ const download_v1 = require('./practice_projects/download_files/v1/download.js')
 app.use('/', download_v1);
 
 // WebSocket port 3001
-require('./practice_projects/webSocket/v1/webSocketServer.js');
+require('./practice_projects/webSocket_chat/v1/webSocketServer.js');
 app.use('/v1/websocket',(req, res, next) => {
   console.log("webSocketServerClient send");
   res.sendFile(path.join(__dirname, './practice_projects/webSocket/v1/webSocketServerClient.html'));
 });
 
+//parsing_JSON
+//v1
+const parsingJSON_v1 = require('./practice_projects/parsing_JSON/v1/parsing_JSON.js');
+app.use('/',parsingJSON_v1);
 
-
-// app.use('/', webSocket_v1);
+//task_planner
+const taskPlanner_v1 = require('./practice_projects/task_planner/v1/taskPlanner.js');
+app.use('/', taskPlanner_v1);
 
 
 // catch 404 and forward to error handler

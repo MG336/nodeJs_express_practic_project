@@ -1,6 +1,6 @@
-//WebSocket чат
-//Реализуйте простой чат-сервер с использованием WebSocket, 
-//который позволяет нескольким пользователям обмениваться сообщениями в реальном времени.
+//WebSocket Chat
+//Implement a simple chat server using WebSocket,
+//which allows multiple users to exchange messages in real time.
 
 const express = require('express');
 const http = require('http');

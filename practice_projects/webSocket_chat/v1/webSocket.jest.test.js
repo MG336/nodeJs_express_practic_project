@@ -25,6 +25,7 @@ app.use(express.static('public'));
 
 
 describe('WebSocket server', ()=> {
+    
     beforeAll((done) => {
         server.listen(3001, done);
     })
@@ -32,7 +33,7 @@ describe('WebSocket server', ()=> {
     afterAll((done) => {
         server.close(done);
     })
-// await event.data.text();
+
     test('should broadcast messages to all clients', (done) =>{
         const client1 = new WebSocket('ws://localhost:3001');
         const client2 = new WebSocket('ws://localhost:3001');
