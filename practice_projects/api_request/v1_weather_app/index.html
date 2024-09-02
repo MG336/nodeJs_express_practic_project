@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+</head>
+<body>
+    <div class="weatherBox">
+        <h2>Check weather</h2>
+        <form id="weatherForm">
+            <input type="text" id="city" name="city" placeholder="Enter city">
+            <button type="submit">Show weather</button>
+        </form>
+        <div class="weatherResult" id="weatherResult"></div>
+    </div>
+
+    <script>
+        const form = document.getElementById('weatherForm');
+        const resultDiv = document.getElementById('weatherResult');
+
+        form.addEventListener('submit', async (e)=> { 
+            console.log('send form')
+            e.preventDefault();
+            const city = document.getElementById('city').value;
+
+            try{
+                const response = await fetch(`/v1/api-request-weather-app?city=${encodeURIComponent(city)}`);
+                const data = await response.json();
+
+                if(response.ok){
+                    resultDiv.innerHTML = `
+                         <h3>Weather in ${data.name}</h3>
+                        <p>Temperature: ${(data.main.temp - 273.15).toFixed(2)}°C</p>
+                        <p>Description: ${data.weather[0].description}</p>
+                        <p>Humidity: ${data.main.humidity}%</p>
+                    `
+                }else{
+                    resultDiv.innerHTML = `<p style="color:red;">${data.message}</p>`;
+                }
+                    
+            }catch(err){
+                resultDiv.innerHTML = `<p style = "color:red;">Error: ${error.message}</p>`
+            }
+        });
+
+    </script>
+</body>
+</html>

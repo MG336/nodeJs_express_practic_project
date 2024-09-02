@@ -71,6 +71,7 @@ app.use('/v1/websocket',(req, res, next) => {
   res.sendFile(path.join(__dirname, './practice_projects/webSocket/v1/webSocketServerClient.html'));
 });
 
+
 //parsing_JSON
 //v1
 const parsingJSON_v1 = require('./practice_projects/parsing_JSON/v1/parsing_JSON.js');
@@ -80,13 +81,17 @@ app.use('/',parsingJSON_v1);
 const taskPlanner_v1 = require('./practice_projects/task_planner/v1/taskPlanner.js');
 app.use('/', taskPlanner_v1);
 
+// api_request
+// weather_app_v1
+const weatherApp_v1 = require('./practice_projects/api_request/v1_weather_app/weatherApp.js');
+app.use('/', weatherApp_v1);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
 
-// 
 
 // error handler
 app.use(function(err, req, res, next) {
