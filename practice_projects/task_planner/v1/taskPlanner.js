@@ -1,6 +1,7 @@
-// Планировщик задач
-// Создайте планировщик задач, который будет выполнять определенную функцию через заданный интервал времени.
-// Например, вывод текущего времени в консоль каждые 5 секунд.
+// Task Scheduler
+// Create a task scheduler that will perform a specific function at a specified interval.
+// For example, output the current time to the console every 5 seconds.
+
 const express = require('express');
 const router = express.Router();
 

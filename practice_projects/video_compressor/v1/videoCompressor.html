@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dynamic Button Example</title>
+</head>
+<body>   
+    <h1>Video Compressor</h1>
+    
+    <form id="compressFiles" submit>
+        <label for="selectInput">path to the folder with files</label> <br>
+        <input type="text" class="input"  id = "selectInput" multiple><br><br>
+
+        <label for="selectInput">path save files folder</label> <br>
+        <input type="text"  class="input" id = "selectOutput" webkitdirectory multiple> <br> <br>
+        <button id="compressButton" type="submit">Start</button>
+    </form>
+
+
+    <p id="message"></p>
+
+    <script>
+
+        document.getElementById('compressFiles').
+        addEventListener('submit',(event)=>{
+            event.preventDefault();
+            handleClick();
+        })
+
+
+        let buttonActive = true;
+        async function handleClick(text) {
+
+            let button = document.getElementById('compressButton');
+            let message = document.getElementById('message');
+            let inputs = document.querySelectorAll('.input');
+
+            const importDirPath = inputs[0].value;
+            const exportDirPath = inputs[1].value;
+            
+            button.disabled = true;
+            message.innerText = 'Files are being processed...';
+            
+            let option = {
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json'  
+                },
+                body: JSON.stringify({importDirPath, exportDirPath})
+            };
+
+            try{
+
+                let response = await fetch('http://localhost:3000/v1/video-compressor', option);
+                
+                
+
+                if(response.ok) {
+                    let json = await response.json();
+                    message.innerText = 'Files created';
+                    button.disabled = false;
+                }else{
+                    button.disabled = false;
+                    message.innerText = 'File Processed Error';
+                    throw new Error('File Processed Error');
+                }
+
+            }catch(err){
+                throw new Error(err);
+            }
+        }   
+    </script>
+</body>
+</html>
+
+
+           

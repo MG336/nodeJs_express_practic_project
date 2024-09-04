@@ -79,7 +79,8 @@ describe('POST /v1/login', ()=> {
     userBlock: false,
     });
 })
-it("should return an error and call next(err) if the user is not found", async () => {
+
+    it("should return an error and call next(err) if the user is not found", async () => {
 
     mockFindOne.mockResolvedValue(null);
 
@@ -100,7 +101,6 @@ it("should return an error and call next(err) if the user is not found", async (
 
     expect(mockFindOne).toHaveBeenCalledWith({ email: "nonexistent@example.com" });
 });
-    
 })
     
 
