@@ -15,7 +15,6 @@ async function checkKeyInDb(req, res, next) {
 
     const currentDate = Date.now();
     const timeOfAction = 60 * 60 * 1000;
-    console.log(Date.now());
 
     const result = await db.collection("users").updateOne(
       {
@@ -49,7 +48,8 @@ async function checkKeyInDb(req, res, next) {
   } catch (err) {
     next(err);
   }
-}
+  
+};
 
 async function updateToken(req, res, next) {
   const {userId, userEmail} = req.user;
@@ -71,7 +71,7 @@ async function updateToken(req, res, next) {
    } catch(err){
      next(err);
 
-}}
+}};
 
 
 router.post ("/v1/email-verified", 

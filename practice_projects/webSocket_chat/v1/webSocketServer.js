@@ -32,7 +32,7 @@ wss.on('connection', (ws)=> {
     });
 
     ws.on('error', (error)=> {
-        console.log('WebSocket error:', error);
+        console.error('WebSocket error:', error);
     });
 })
 

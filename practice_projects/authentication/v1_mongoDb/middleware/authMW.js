@@ -14,12 +14,12 @@ async function decodedToken(req, res, next) {
 
        req.user = decoded;
        next();
-        
-
     } catch(err){
         next(err);
     }
 }
+        
+
 
 
 async function sendKeyToUserEmailAndStorage(req, res, next) {

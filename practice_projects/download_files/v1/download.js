@@ -27,7 +27,6 @@ async function downloadFile(req, res, next){
 
 router.get('/v1/download/:filename', downloadFile);
 router.get('/v1/download', (req, res)=>{
-    console.log('download!!!!!!!!');
     // res.status(200)
     // res.sendStatus(200)
     res.sendFile(path.join(__dirname, 'download.html'));

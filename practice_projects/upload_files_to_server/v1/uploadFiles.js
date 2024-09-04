@@ -1,6 +1,5 @@
-// Загрузка файлов
-// Напишите сервер, который позволяет загружать файлы на сервер и скачивать их по ссылке. 
-// Используйте multer для обработки загрузки файлов.
+// File Upload
+// Write a server that allows you to upload files to the server and download them via a link.
 
 const express = require('express');
 const multer = require('multer');
@@ -22,9 +21,6 @@ async function createFolder(req, res, next){
    
 async function uploadFiles(req, res, next) {
     const uploadPath = req.upload.path;
-    const file = req.file;
-    console.log(req.file);
-    console.log('uploadFiles!!!!!!!!!!!!!!!!!!!!!!!!!!!');
     try {
     const storage = multer.diskStorage({
         destination: (req, file, cb) => {
@@ -42,10 +38,9 @@ async function uploadFiles(req, res, next) {
 
     upload(req, res, function (err) {
         if (err) {
-            return next(err); // Обработка ошибок при загрузке
+            return next(err); 
         }
 
-        console.log(req.file); // Теперь `req.file` определен
 
         res.status(200).json({
             message: 'File uploaded successfully',
@@ -57,9 +52,6 @@ async function uploadFiles(req, res, next) {
         next(err)
     }
 }
-
-
-// const upload = multer({storage: storage});
 
 router.post('/v1/upload',
     createFolder,
