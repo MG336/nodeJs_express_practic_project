@@ -6,14 +6,14 @@ app.use(express.json());
 
 app.use("/", taskManager);
 
-jest.mock("../../../connectDb/postgreSQL.js", () => {
+jest.mock("../../../../connectDb/postgreSQL.js", () => {
   const mPool = {
     query: jest.fn(),
   };
   return { poolPostgreSQL: mPool };
 });
 
-const { poolPostgreSQL } = require("../../../connectDb/postgreSQL");
+const { poolPostgreSQL } = require("../../../../connectDb/postgreSQL");
 
 describe("task manager v1", () => {
   

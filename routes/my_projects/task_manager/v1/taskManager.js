@@ -5,7 +5,7 @@
 
 const express = require("express");
 const router = express.Router();
-const {poolPostgreSQL} = require('../../../connectDb/postgreSQL');
+const {poolPostgreSQL} = require('../../../../connectDb/postgreSQL');
 
 function checkDatabaseResult(result){
     // if(result.rows.length === 0) {return res.status(404).json({message: 'Task not found'})}
